@@ -7,15 +7,10 @@ module FormtasticBootstrap
 
         def hint_html(inline_or_block = :inline)
           if hint?
-            hint_class = if inline_or_block == :inline
-              options[:hint_class] || builder.default_inline_hint_class
-            else
-              options[:hint_class] || builder.default_block_hint_class
-            end
             template.content_tag(
-              :span, 
+              :p, 
               Formtastic::Util.html_safe(hint_text), 
-              :class => hint_class
+              :class => 'help-block'
             )
           end
         end

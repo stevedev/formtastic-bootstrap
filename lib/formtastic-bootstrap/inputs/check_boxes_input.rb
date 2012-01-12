@@ -9,13 +9,9 @@ module FormtasticBootstrap
           legend_html <<
           hidden_field_for_all <<
           input_div_wrapping do
-            choices_group_wrapping do
-              collection.map { |choice|
-                choice_wrapping(choice_wrapping_html_options(choice)) do
-                  choice_html(choice)
-                end
-              }.join("\n").html_safe
-            end
+            collection.map { |choice|
+              choice_html(choice)
+            }.join("\n").html_safe
           end
         end
       end
@@ -25,8 +21,8 @@ module FormtasticBootstrap
           hidden_fields? ?
             check_box_with_hidden_input(choice) :
             check_box_without_hidden_input(choice) <<
-          choice_label(choice),
-          label_html_options.merge(:for => choice_input_dom_id(choice), :class => nil)
+          choice[0],
+          label_html_options.merge(:for => choice_input_dom_id(choice), :class => "checkbox")
         )
       end
 

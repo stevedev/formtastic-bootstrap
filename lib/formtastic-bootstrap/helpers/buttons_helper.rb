@@ -7,27 +7,27 @@ module FormtasticBootstrap
       def buttons(*args, &block)
 
         html_options = args.extract_options!
-        html_options[:class] ||= "actions"
+        html_options[:class] ||= "form-actions"
   
         if html_options.has_key?(:name)
           ActiveSupport::Deprecation.warn('The :name option is not supported')
         end
 
         if block_given?
-          template.content_tag(:div, html_options) do
+          template.content_tag(:fieldset, html_options) do
             yield
           end          
         else
-          args = [:commit] if args.empty?
+          args = [:submit] if args.empty?
           contents = args.map { |button_name| send(:"#{button_name}_button") }
-          template.content_tag(:div, html_options.except(:builder, :parent, :name)) do
+          template.content_tag(:fieldset, html_options.except(:builder, :parent, :name)) do
             Formtastic::Util.html_safe(contents.join)
           end
         end
 
       end
 
-      def commit_button(*args)
+      def submit_button(*args)
         options = args.extract_options!
         text = options.delete(:label) || args.shift
       
@@ -35,7 +35,7 @@ module FormtasticBootstrap
                 Formtastic::I18n.t(commit_button_i18n_key, :model => commit_button_object_name)) unless text.is_a?(::String)
       
         button_html = options.delete(:button_html) || {}
-        button_html.merge!(:class => [button_html[:class], "btn commit", commit_button_i18n_key].compact.join(' '))
+        button_html.merge!(:class => [button_html[:class], "btn primary", commit_button_i18n_key].compact.join(' '))
       
         # TODO We don't have a wrapper. Add deprecation message.
         # wrapper_html = options.delete(:wrapper_html) || {}
@@ -46,7 +46,6 @@ module FormtasticBootstrap
         
         Formtastic::Util.html_safe(submit(text, button_html))
       end
-
     end
   end
 end

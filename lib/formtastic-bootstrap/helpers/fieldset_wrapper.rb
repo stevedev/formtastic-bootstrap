@@ -24,12 +24,8 @@ module FormtasticBootstrap
 
         # Ruby 1.9: String#to_s behavior changed, need to make an explicit join.
         contents = contents.join if contents.respond_to?(:join)
-        fieldset = template.content_tag(:fieldset,
-          Formtastic::Util.html_safe(legend) << Formtastic::Util.html_safe(contents),
-          html_options.except(:builder, :parent, :name)
-        )
 
-        fieldset
+        Formtastic::Util.html_safe(legend) << Formtastic::Util.html_safe(contents)
       end
 
     end
