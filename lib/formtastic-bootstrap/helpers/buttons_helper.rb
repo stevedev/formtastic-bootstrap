@@ -27,7 +27,7 @@ module FormtasticBootstrap
 
       end
 
-      def submit_button(*args)
+      def commit_button(*args)
         options = args.extract_options!
         text = options.delete(:label) || args.shift
       
