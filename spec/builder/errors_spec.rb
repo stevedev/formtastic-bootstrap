@@ -119,51 +119,6 @@ describe 'Formtastic::FormBuilder#errors_on' do
       output_buffer.should_not have_tag('ul.errors')
     end
 
-    it 'should allow calling deprecated errors_on and inline_errors_for helpers' do
-      FormtasticBootstrap::FormBuilder.inline_errors = :sentence
-      with_deprecation_silenced do
-        concat(semantic_form_for(@new_post) do |builder|
-          builder.errors_on :title
-          builder.inline_errors_for :title
-        end)
-      end
-    end
-  end
-
-  describe 'when there are no errors (nil)' do
-    before do
-      @errors.stub!(:[]).with(:title).and_return(nil)
-    end
-
-    it 'should return nil when inline_errors config is :sentence, :list or :none' do
-      with_deprecation_silenced do
-        [:sentence, :list, :none].each do |config|
-          with_config :inline_errors, config do
-            semantic_form_for(@new_post) do |builder|
-              builder.errors_on(:title).should be_nil
-            end
-          end
-        end
-      end
-    end
-  end
-
-  describe 'when there are no errors (empty array)' do
-
-    before(:each) do
-      @errors.stub!(:[]).with(:title).and_return([])
-    end
-
-    it 'should return nil when inline_errors config is :sentence, :list or :none' do
-      with_deprecation_silenced do
-        [:sentence, :list, :none].each do |config|
-          FormtasticBootstrap::FormBuilder.inline_errors = config
-          semantic_form_for(@new_post) do |builder|
-            builder.errors_on(:title).should be_nil
-          end
-        end
-      end
-    end
   end
 
   describe 'when file type columns have errors' do
