@@ -16,7 +16,6 @@ describe 'file input' do
   end
 
   it_should_have_input_wrapper_with_class("file")
-  it_should_have_input_wrapper_with_class(:clearfix)
   it_should_have_input_class_in_the_right_place
   it_should_have_input_wrapper_with_id("post_body_input")
   it_should_have_label_with_text(/Body/)
@@ -29,7 +28,7 @@ describe 'file input' do
     concat(semantic_form_for(@new_post) do |builder|
       concat(builder.input(:title, :as => :file, :input_html => { :class => 'myclass' }))
     end)
-    output_buffer.should have_tag("form div.clearfix div.input input.myclass")
+    output_buffer.should have_tag("form fieldset.control-group div.controls input.myclass")
   end
 
   describe "when namespace is provided" do
@@ -47,7 +46,7 @@ describe 'file input' do
     it_should_have_label_and_input_with_id("context2_post_body")
 
   end
-  
+
   context "when required" do
     it "should add the required attribute to the input's html options" do
       with_config :use_required_attribute, true do
@@ -58,6 +57,6 @@ describe 'file input' do
       end
     end
   end
-  
+
 end
 

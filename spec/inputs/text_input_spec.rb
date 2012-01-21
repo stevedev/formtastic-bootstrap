@@ -16,7 +16,6 @@ describe 'text input' do
   end
 
   it_should_have_input_wrapper_with_class("text")
-  it_should_have_input_wrapper_with_class(:clearfix)
   it_should_have_input_class_in_the_right_place
   it_should_have_input_wrapper_with_id("post_body_input")
   it_should_have_label_with_text(/Body/)
@@ -30,7 +29,7 @@ describe 'text input' do
     concat(semantic_form_for(@new_post) do |builder|
       concat(builder.input(:title, :as => :text, :input_html => { :class => 'myclass' }))
     end)
-    output_buffer.should have_tag("form div.clearfix div.input textarea.myclass")
+    output_buffer.should have_tag("form fieldset.control-group div.controls textarea.myclass")
   end
 
   it "should have a cols attribute when :cols is a number in :input_html" do
@@ -38,7 +37,7 @@ describe 'text input' do
     concat(semantic_form_for(@new_post) do |builder|
       concat(builder.input(:title, :as => :text, :input_html => { :cols => 42 }))
     end)
-    output_buffer.should have_tag("form div.clearfix div.input textarea[@cols='42']")
+    output_buffer.should have_tag("form fieldset.control-group div.controls textarea[@cols='42']")
   end
 
   it "should not have a cols attribute when :cols is nil in :input_html" do
@@ -46,7 +45,7 @@ describe 'text input' do
     concat(semantic_form_for(@new_post) do |builder|
       concat(builder.input(:title, :as => :text, :input_html => { :cols => nil }))
     end)
-    output_buffer.should_not have_tag("form div.clearfix div.input textarea[@cols]")
+    output_buffer.should_not have_tag("form fieldset.control-group div.controls textarea[@cols]")
   end
 
   it "should have a rows attribute when :rows is a number in :input_html" do
@@ -54,7 +53,7 @@ describe 'text input' do
     concat(semantic_form_for(@new_post) do |builder|
       concat(builder.input(:title, :as => :text, :input_html => { :rows => 42 }))
     end)
-    output_buffer.should have_tag("form div.clearfix div.input textarea[@rows='42']")
+    output_buffer.should have_tag("form fieldset.control-group div.controls textarea[@rows='42']")
 
   end
 
@@ -63,7 +62,7 @@ describe 'text input' do
     concat(semantic_form_for(@new_post) do |builder|
       concat(builder.input(:title, :as => :text, :input_html => { :rows => nil }))
     end)
-    output_buffer.should_not have_tag("form div.clearfix div.input textarea[@rows]")
+    output_buffer.should_not have_tag("form fieldset.control-group div.controls textarea[@rows]")
   end
 
   describe "when namespace is provided" do
@@ -83,10 +82,10 @@ describe 'text input' do
     it_should_have_label_for("context2_post_body")
 
   end
-  
+
   context "when required" do
     it "should add the required attribute to the input's html options" do
-      with_config :use_required_attribute, true do 
+      with_config :use_required_attribute, true do
         concat(semantic_form_for(@new_post) do |builder|
           concat(builder.input(:title, :as => :text, :required => true))
         end)
@@ -119,7 +118,7 @@ describe 'text input' do
         concat(semantic_form_for(@new_post) do |builder|
           concat(builder.input(:title, :as => :text))
         end)
-        output_buffer.should have_tag("form div.clearfix div.input textarea[@rows='12']")
+        output_buffer.should have_tag("form fieldset.control-group div.controls textarea[@rows='12']")
       end
     end
 
@@ -128,7 +127,7 @@ describe 'text input' do
         concat(semantic_form_for(@new_post) do |builder|
           concat(builder.input(:title, :as => :text))
         end)
-        output_buffer.should_not have_tag("form div.clearfix div.input textarea[@rows]")
+        output_buffer.should_not have_tag("form fieldset.control-group div.controls textarea[@rows]")
       end
 
     end
@@ -144,7 +143,7 @@ describe 'text input' do
         concat(semantic_form_for(@new_post) do |builder|
           concat(builder.input(:title, :as => :text))
         end)
-        output_buffer.should have_tag("form div.clearfix div.input textarea[@cols='10']")
+        output_buffer.should have_tag("form fieldset.control-group div.controls textarea[@cols='10']")
       end
     end
 
@@ -153,7 +152,7 @@ describe 'text input' do
         concat(semantic_form_for(@new_post) do |builder|
           concat(builder.input(:title, :as => :text))
         end)
-        output_buffer.should_not have_tag("form div.clearfix div.input textarea[@cols]")
+        output_buffer.should_not have_tag("form fieldset.control-group div.controls textarea[@cols]")
       end
 
     end

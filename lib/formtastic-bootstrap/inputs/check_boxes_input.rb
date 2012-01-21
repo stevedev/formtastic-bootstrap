@@ -21,7 +21,7 @@ module FormtasticBootstrap
           hidden_fields? ?
             check_box_with_hidden_input(choice) :
             check_box_without_hidden_input(choice) <<
-          choice[0],
+          choice,
           label_html_options.merge(:for => choice_input_dom_id(choice), :class => "checkbox")
         )
       end

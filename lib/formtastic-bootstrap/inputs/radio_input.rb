@@ -8,18 +8,18 @@ module FormtasticBootstrap
         clearfix_div_wrapping do
           legend_html <<
           input_div_wrapping do
-            collection.map { |choice| 
+            collection.map { |choice|
               choice_html(choice)
             }.join("\n").html_safe
           end
         end
       end
 
-      def choice_html(choice)        
+      def choice_html(choice)
         template.content_tag(:label, label_html_options.merge(:for => choice_input_dom_id(choice), :class => "radio")) do
-          builder.radio_button(input_name, choice_value(choice), input_html_options.merge(choice_html_options(choice)).merge(:required => false)) << 
+          builder.radio_button(input_name, choice_value(choice), input_html_options.merge(choice_html_options(choice)).merge(:required => false)) <<
 
-          choice[0]
+          choice
         end
       end
 
