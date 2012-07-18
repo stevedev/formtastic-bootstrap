@@ -11,7 +11,7 @@ module FormtasticBootstrap
             input_div_wrapping do
               if options[:prepend]
                 prepended_input_wrapping do
-                  [template.content_tag(:span, options[:prepend], :class => 'add-on'), yield].join("\n").html_safe
+                  [template.content_tag(:span, options[:prepend], :class => 'add-on'), yield].join("").html_safe
                 end
               else
                 yield
